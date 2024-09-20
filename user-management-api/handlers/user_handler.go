@@ -1,16 +1,20 @@
 package handlers
 
 import (
+	"fmt"
 	"net/http"
+	"user-management-api/dao"
 	"user-management-api/models"
 
 	"github.com/gin-gonic/gin"
 )
 
 func GetUser(c *gin.Context) {
-	//id := c.Param("id")
+	id := c.Param("id")
+	fmt.Println("Got Id in the request", id)
+	user := dao.GetUser(id)
 	// Fetch user by ID from database
-	user := models.User{ID: 1, Name: "Aladin ka gin"}
+	//user := models.User{ID: 1, Name: "Aladin ka gin"}
 	c.JSON(http.StatusOK, user)
 }
 
@@ -21,6 +25,7 @@ func CreateUser(c *gin.Context) {
 		return
 	}
 	// Save user to database
+	//dao.CreateUser(user)
 	c.JSON(http.StatusCreated, user)
 }
 
